@@ -60,10 +60,10 @@ pipeline {
         }
         stage('docker build and tag') {
             steps {
-                echo "Pushing to docker hub"
+                echo "Pushing to dockerhub"
                 withCredentials([usernamePassword(credentialsId:"docker",passwordVariable:"dockerHubpass",usernameVariable:"dockerHubUser")]){
                 sh "docker login -u ${dockerHubUser} -p ${dockerHubpass}"
-                sh "docker build -t blog-app:latest ."
+                sh "docker build -t Blogging-app:latest ."
                 
                 }
             }
@@ -78,8 +78,8 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId:"docker",passwordVariable:"dockerHubpass",usernameVariable:"dockerHubUser")]){
                 sh "docker login -u ${dockerHubUser} -p ${dockerHubpass}"
-                sh 'docker tag blog-app ${dockerHubUser}/blog-app:${BUILD_ID}'
-                sh 'docker push ${dockerHubUser}/blog-app:${BUILD_ID}'
+                sh 'docker tag Blogging-app ${dockerHubUser}/Blogging-app:${BUILD_ID}'
+                sh 'docker push ${dockerHubUser}/Blogging-app:${BUILD_ID}'
                 
                 }
             }
